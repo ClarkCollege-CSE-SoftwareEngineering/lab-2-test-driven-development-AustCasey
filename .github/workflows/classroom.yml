@@ -1,0 +1,61 @@
+name: Autograding Tests
+'on':
+- push
+- repository_dispatch
+permissions:
+  checks: write
+  actions: read
+  contents: read
+jobs:
+  run-autograding-tests:
+    runs-on: ubuntu-latest
+    if: github.actor != 'github-classroom[bot]'
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    - name: Typescript Compiles
+      id: typescript-compiles
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Typescript Compiles
+        setup-command: npm ci
+        command: npm run build
+        timeout: 5
+        max-score: 15
+    - name: All Tests Pass
+      id: all-tests-pass
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: All Tests Pass
+        setup-command: npm ci
+        command: npm test
+        timeout: 5
+        max-score: 30
+    - name: Coverage Threshold
+      id: coverage-threshold
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Coverage Threshold
+        setup-command: npm ci
+        command: npm run test:coverage
+        timeout: 5
+        max-score: 15
+    - name: Minimum Test Count
+      id: minimum-test-count
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Minimum Test Count
+        setup-command: npm ci
+        command: test $(grep -cE "^\s*(it|test)\s*\(" src/__tests__/*.test.ts) -ge
+          16
+        timeout: 1
+        max-score: 10
+    - name: Autograding Reporter
+      uses: classroom-resources/autograding-grading-reporter@v1
+      env:
+        TYPESCRIPT-COMPILES_RESULTS: "${{steps.typescript-compiles.outputs.result}}"
+        ALL-TESTS-PASS_RESULTS: "${{steps.all-tests-pass.outputs.result}}"
+        COVERAGE-THRESHOLD_RESULTS: "${{steps.coverage-threshold.outputs.result}}"
+        MINIMUM-TEST-COUNT_RESULTS: "${{steps.minimum-test-count.outputs.result}}"
+      with:
+        runners: typescript-compiles,all-tests-pass,coverage-threshold,minimum-test-count
