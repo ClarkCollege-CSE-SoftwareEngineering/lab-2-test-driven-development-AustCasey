@@ -1,0 +1,29 @@
+{
+  "name": "lab-2-test-driven-development-austcasey",
+  "version": "1.0.0",
+  "description": "[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/72n2o9cT)\r # Lab 2: Test-Driven Development with Vitest",
+  "main": "index.js",
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ClarkCollege-CSE-SoftwareEngineering/lab-2-test-driven-development-AustCasey.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/ClarkCollege-CSE-SoftwareEngineering/lab-2-test-driven-development-AustCasey/issues"
+  },
+  "homepage": "https://github.com/ClarkCollege-CSE-SoftwareEngineering/lab-2-test-driven-development-AustCasey#readme",
+  "devDependencies": {
+    "@vitest/coverage-v8": "^4.0.17",
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.17"
+  }
+}
