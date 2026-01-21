@@ -672,3 +672,34 @@ Check the HTML coverage report in `coverage/index.html` to see which lines aren'
 - 🔗 [Mocks Aren't Stubs](https://martinfowler.com/articles/mocksArentStubs.html) — Martin Fowler
 - 🔗 [Test Double](https://martinfowler.com/bliki/TestDouble.html) — Martin Fowler
 - 🔗 [Testing Implementation Details](https://kentcdodds.com/blog/testing-implementation-details) — Kent C. Dodds
+
+
+**Deliverables**
+## Reflection questions
+2.1 Writing the test first forces us to think about how the function will be used. By ensuring that it is a failing test, we know that it is working properly since the behavior of that test right now should be a failed state.
+
+2.4 This approach would be a classicist approach since we are not mocking up anything. The reason we do not need test doubles is because the code under test does not rely on outside information to operate properly. 
+
+3.3 If we used toBe here and the test failed because of rounding.
+
+## Project description
+We created a program that can take a cart full of items and calculate their total cost while factoring in tax and discounts, following the TDD method.
+
+## How to run tests
+use npm test in source directory to run all tests.
+Use npm run test:coverage in source directory to see test coverage.
+
+## Function descriptions
+applyDiscount takes a subtotal as well as a discount percentage and applies it to the subtotal. Assuming the discount percentage is between 0 and 100 it will then return the discounted total. Otherwise, it throws an error.
+
+calculateTax takes an item price, its tax rate, and its tax exemption status. If the tax rate is greater than 0, the price is grewater than 0, and it is not tax exempt, it returns the post tax value. If it fails one of those checks it either throws an error or returns the originial value. 
+
+calculateTotal takes a cart of items and applies the discounts to each item, taxes those which are applicable, and returns the subtotal, total discount, total tax and a grand total. 
+
+## final reflection section
+
+TDD helped me to determine what I need my function to achieve before I started writing it. This helped to break it into more bite sized pieces and worked as a kind of prototyping step.
+
+I believe the doubles used were mocks in the tests because they provide canned answers but they can throw exceptions when they do not recieve the expected response. 
+
+If I wrote the implementation first I probably would have spent much more time trouble shooting. I likely would not have had as clear of an idea what my function should do and it would have been more difficult to build it correctly. 
